@@ -10,12 +10,37 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot
 
 
+class List:
+    def __init__(self):
+        # self.stackA
+        self.make_list()
+
+    def make_list(self):
+        protolist = np.random.randint(-200, 200, 10)
+        protolist = np.random.normal(50, 200, 10).astype(int)
+        # list1 = np.array([-140, 58, 135, 2, -158, -185, 146, 100, 65, -183])
+        # np.random.shuffle(protolist)
+        # for _ in range(10):
+        #     probability = np.random.rand()
+        #     threshold = fee_count
+
+        print(protolist)
+
+
+# List()
+
+
 class Ui_MainWindow(object):
 
     def __init__(self):
-
-        self.stacksA = [[np.random.randint(50, 200) for i in range(10)] for _ in range(10)]
-
+        self.listA = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
+        self.listB = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
+        self.listC = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
+        self.listD = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
+        print(self.listA)
+        print(self.listB)
+        print(self.listC)
+        print(self.listD)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -24,8 +49,6 @@ class Ui_MainWindow(object):
         MainWindow.setDocumentMode(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-
-
 
         self.pushButtonA = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonA.setGeometry(QtCore.QRect(220, 160, 141, 201))
@@ -127,10 +150,12 @@ class Ui_MainWindow(object):
         print('Button B')
         # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
         self.card_a.setStyleSheet("color: red; font: 14pt")
+
     def btnC_on_click(self):
         print('Button C')
         # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
         self.card_a.setStyleSheet("color: red; font: 14pt")
+
     def btnD_on_click(self):
         print('Button D')
         # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
