@@ -43,9 +43,9 @@ class Ui_MainWindow(object):
 
     def init_lists(self):
         self.listA = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
-        self.listB = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
-        self.listC = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
-        self.listD = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
+        self.listB = np.random.normal(np.random.randint(0, 50), np.random.randint(100, 200), 10).astype(int)
+        self.listC = np.random.normal(np.random.randint(-50, 50), np.random.randint(100, 200), 10).astype(int)
+        self.listD = np.random.normal(np.random.randint(-30, 40), np.random.randint(100, 200), 10).astype(int)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -151,7 +151,16 @@ class Ui_MainWindow(object):
                 self.episode += 1
                 self.counter = 0
             if self.episode < 2:
-                self.gain_counter.setText(str(self.listA[self.counter]))
+                gain = self.listA[self.counter]
+                if gain > 0:
+                    self.gain_counter.setStyleSheet("color: green; font: 14pt")
+                elif gain < 0:
+                    self.gain_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.gain_counter.setStyleSheet("color: black; font: 14pt")
+
+
+                self.gain_counter.setText(str(gain))
                 self.counter += 1
                 self.counter_number.setText(str(self.counter))
                 self.episode_counter.setText(str(self.episode))
