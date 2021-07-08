@@ -5,9 +5,15 @@
 # Created by: PyQt5 UI code generator 5.9.2
 #
 # WARNING! All changes made in this file will be lost!
+import time
+from datetime import datetime
+
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot
+
+
+# def write_to_file(gain, total, counter, episode):
 
 
 class List:
@@ -39,10 +45,24 @@ class Ui_MainWindow(object):
         self.listD = np.zeros(10).astype(int)
         self.counter = 0
         self.max_counter = 9
-        self.max_episode = 4
         self.episode = 1
+        self.max_episode = 4  # since the episode starts from 1 it should be 1 more than the desired maximum
         self.total_score = 0
         self.init_lists()
+        self.file = open("data.csv", "w")
+        header = f"اپیسود" \
+                 f", " \
+                 f"شماره" \
+                 f", " \
+                 f"سود" \
+                 f", " \
+                 f"مجموع" \
+                 f", " \
+                 f"کارت" \
+                 f", " \
+                 f"مدت زمان اتنخاب کارت" \
+                 f"\n"
+        self.file.write(header)
 
     def init_lists(self):
         self.listA = np.random.normal(np.random.randint(-10, 30), np.random.randint(100, 200), 10).astype(int)
@@ -174,6 +194,55 @@ class Ui_MainWindow(object):
                 else:
                     self.total_score_counter.setStyleSheet("color: black; font: 14pt")
 
+                self.counter += 1
+
+                self.gain_counter.setText(str(gain))
+                self.counter_number.setText(str(self.counter))
+                self.episode_counter.setText(str(self.episode))
+                self.total_score_counter.setText(str(self.total_score))
+
+                text = f"{self.episode}, {self.counter}, {gain}, {self.total_score}, A\n"
+                self.file.write(text)
+
+                print(self.listA)
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: red; font: 14pt")
+
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: red; font: 14pt")
+                self.card_b.setStyleSheet("color: black; font: 14pt")
+                self.card_c.setStyleSheet("color: black; font: 14pt")
+                self.card_d.setStyleSheet("color: black; font: 14pt")
+            else:
+                self.title.setText("پایان")
+                self.file.close()
+        print(f"A: counter {self.counter}")
+
+    def btnB_on_click(self):
+        if self.episode < self.max_episode:
+            if self.counter > self.max_counter:
+                self.episode += 1
+                self.total_score = 0
+                self.counter = 0
+            if self.episode < self.max_episode:
+                gain = self.listA[self.counter]
+                self.total_score += gain
+                if gain > 0:
+                    self.gain_counter.setStyleSheet("color: green; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
+                elif gain < 0:
+                    self.gain_counter.setStyleSheet("color: red; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.gain_counter.setStyleSheet("color: black; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
+
+                if self.total_score > 0:
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
+                elif self.total_score < 0:
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
 
                 self.counter += 1
 
@@ -181,33 +250,126 @@ class Ui_MainWindow(object):
                 self.counter_number.setText(str(self.counter))
                 self.episode_counter.setText(str(self.episode))
                 self.total_score_counter.setText(str(self.total_score))
-                print(self.listA)
-                self.counter_number.setText(str(self.counter))
-                self.episode_counter.setText(str(self.episode))
+
+                text = f"{self.episode}, {self.counter}, {gain}, {self.total_score}, B\n"
+                self.file.write(text)
+
+                print(self.listB)
                 # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
                 self.card_a.setStyleSheet("color: red; font: 14pt")
 
                 # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
-                self.card_a.setStyleSheet("color: red; font: 14pt")
+                self.card_a.setStyleSheet("color: black; font: 14pt")
+                self.card_b.setStyleSheet("color: red; font: 14pt")
+                self.card_c.setStyleSheet("color: black; font: 14pt")
+                self.card_d.setStyleSheet("color: black; font: 14pt")
             else:
                 self.title.setText("پایان")
-        print(f"A: counter {self.counter}")
+                self.file.close()
 
-
-    def btnB_on_click(self):
-        print('Button B')
-        # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
-        self.card_a.setStyleSheet("color: red; font: 14pt")
+        print(f"B: counter {self.counter}")
 
     def btnC_on_click(self):
-        print('Button C')
-        # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
-        self.card_a.setStyleSheet("color: red; font: 14pt")
+        if self.episode < self.max_episode:
+            if self.counter > self.max_counter:
+                self.episode += 1
+                self.total_score = 0
+                self.counter = 0
+            if self.episode < self.max_episode:
+                gain = self.listA[self.counter]
+                self.total_score += gain
+                if gain > 0:
+                    self.gain_counter.setStyleSheet("color: green; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
+                elif gain < 0:
+                    self.gain_counter.setStyleSheet("color: red; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.gain_counter.setStyleSheet("color: black; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
+
+                if self.total_score > 0:
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
+                elif self.total_score < 0:
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
+
+                self.counter += 1
+
+                self.gain_counter.setText(str(gain))
+                self.counter_number.setText(str(self.counter))
+                self.episode_counter.setText(str(self.episode))
+                self.total_score_counter.setText(str(self.total_score))
+
+                text = f"{self.episode}, {self.counter}, {gain}, {self.total_score}, C\n"
+                self.file.write(text)
+
+                print(self.listC)
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: red; font: 14pt")
+
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: black; font: 14pt")
+                self.card_b.setStyleSheet("color: black; font: 14pt")
+                self.card_c.setStyleSheet("color: red; font: 14pt")
+                self.card_d.setStyleSheet("color: black; font: 14pt")
+            else:
+                self.title.setText("پایان")
+                self.file.close()
+
+        print(f"C: counter {self.counter}")
 
     def btnD_on_click(self):
-        print('Button D')
-        # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
-        self.card_a.setStyleSheet("color: red; font: 14pt")
+        if self.episode < self.max_episode:
+            if self.counter > self.max_counter:
+                self.episode += 1
+                self.total_score = 0
+                self.counter = 0
+            if self.episode < self.max_episode:
+                gain = self.listA[self.counter]
+                self.total_score += gain
+                if gain > 0:
+                    self.gain_counter.setStyleSheet("color: green; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
+                elif gain < 0:
+                    self.gain_counter.setStyleSheet("color: red; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.gain_counter.setStyleSheet("color: black; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
+
+                if self.total_score > 0:
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
+                elif self.total_score < 0:
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
+
+                self.counter += 1
+
+                self.gain_counter.setText(str(gain))
+                self.counter_number.setText(str(self.counter))
+                self.episode_counter.setText(str(self.episode))
+                self.total_score_counter.setText(str(self.total_score))
+
+                text = f"{self.episode}, {self.counter}, {gain}, {self.total_score}, D\n"
+                self.file.write(text)
+
+                print(self.listD)
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: red; font: 14pt")
+
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: black; font: 14pt")
+                self.card_b.setStyleSheet("color: black; font: 14pt")
+                self.card_c.setStyleSheet("color: black; font: 14pt")
+                self.card_d.setStyleSheet("color: red; font: 14pt")
+            else:
+                self.title.setText("پایان")
+                self.file.close()
+
+        print(f"D: counter {self.counter}")
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
