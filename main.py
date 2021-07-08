@@ -38,18 +38,22 @@ class Ui_MainWindow(object):
         self.listC = np.zeros(10).astype(int)
         self.listD = np.zeros(10).astype(int)
         self.counter = 0
+        self.max_counter = 9
+        self.max_episode = 4
         self.episode = 1
+        self.total_score = 0
         self.init_lists()
 
     def init_lists(self):
-        self.listA = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
-        self.listB = np.random.normal(np.random.randint(0, 50), np.random.randint(100, 200), 10).astype(int)
-        self.listC = np.random.normal(np.random.randint(-50, 50), np.random.randint(100, 200), 10).astype(int)
-        self.listD = np.random.normal(np.random.randint(-30, 40), np.random.randint(100, 200), 10).astype(int)
+        self.listA = np.random.normal(np.random.randint(-10, 30), np.random.randint(100, 200), 10).astype(int)
+        self.listB = np.random.normal(np.random.randint(0, 5), np.random.randint(100, 200), 10).astype(int)
+        self.listC = np.random.normal(np.random.randint(-10, 10), np.random.randint(100, 200), 10).astype(int)
+        self.listD = np.random.normal(np.random.randint(-30, 10), np.random.randint(100, 200), 10).astype(int)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1036, 600)
+        MainWindow.setFixedSize(MainWindow.width(), MainWindow.height())
         MainWindow.setStyleSheet("")
         MainWindow.setDocumentMode(False)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -112,7 +116,7 @@ class Ui_MainWindow(object):
         self.episode_counter.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.episode_counter.setObjectName("episode_counter")
         self.total_score_counter = QtWidgets.QLabel(self.centralwidget)
-        self.total_score_counter.setGeometry(QtCore.QRect(610, 390, 57, 15))
+        self.total_score_counter.setGeometry(QtCore.QRect(580, 390, 57, 15))
         self.total_score_counter.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.total_score_counter.setObjectName("total_score_counter")
         self.total_score_label = QtWidgets.QLabel(self.centralwidget)
@@ -144,26 +148,39 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    # @pyqtSlot()
     def btnA_on_click(self):
-        if self.episode < 2:
-            if self.counter > 9:
+        if self.episode < self.max_episode:
+            if self.counter > self.max_counter:
                 self.episode += 1
+                self.total_score = 0
                 self.counter = 0
-            if self.episode < 2:
+            if self.episode < self.max_episode:
                 gain = self.listA[self.counter]
+                self.total_score += gain
                 if gain > 0:
                     self.gain_counter.setStyleSheet("color: green; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
                 elif gain < 0:
                     self.gain_counter.setStyleSheet("color: red; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
                 else:
                     self.gain_counter.setStyleSheet("color: black; font: 14pt")
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
 
+                if self.total_score > 0:
+                    self.total_score_counter.setStyleSheet("color: green; font: 14pt")
+                elif self.total_score < 0:
+                    self.total_score_counter.setStyleSheet("color: red; font: 14pt")
+                else:
+                    self.total_score_counter.setStyleSheet("color: black; font: 14pt")
+
+
+                self.counter += 1
 
                 self.gain_counter.setText(str(gain))
-                self.counter += 1
                 self.counter_number.setText(str(self.counter))
                 self.episode_counter.setText(str(self.episode))
+                self.total_score_counter.setText(str(self.total_score))
                 print(self.listA)
                 self.counter_number.setText(str(self.counter))
                 self.episode_counter.setText(str(self.episode))
