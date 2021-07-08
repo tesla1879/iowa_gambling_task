@@ -38,7 +38,7 @@ class Ui_MainWindow(object):
         self.listC = np.zeros(10).astype(int)
         self.listD = np.zeros(10).astype(int)
         self.counter = 0
-        self.episode = 0
+        self.episode = 1
         self.init_lists()
 
     def init_lists(self):
@@ -146,10 +146,27 @@ class Ui_MainWindow(object):
 
     # @pyqtSlot()
     def btnA_on_click(self):
-        print('Button A')
-        print(self.stacksA.pop())
-        # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
-        self.card_a.setStyleSheet("color: red; font: 14pt")
+        if self.episode < 2:
+            if self.counter > 9:
+                self.episode += 1
+                self.counter = 0
+            if self.episode < 2:
+                self.gain_counter.setText(str(self.listA[self.counter]))
+                self.counter += 1
+                self.counter_number.setText(str(self.counter))
+                self.episode_counter.setText(str(self.episode))
+                print(self.listA)
+                self.counter_number.setText(str(self.counter))
+                self.episode_counter.setText(str(self.episode))
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: red; font: 14pt")
+
+                # self.episode_counter.setText(str(int(self.episode_counter.text()) + 1))
+                self.card_a.setStyleSheet("color: red; font: 14pt")
+            else:
+                self.title.setText("پایان")
+        print(f"A: counter {self.counter}")
+
 
     def btnB_on_click(self):
         print('Button B')
@@ -171,7 +188,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.title.setText(_translate("MainWindow", "روی کارت ها کلیک کنید"))
         self.counter_label.setText(_translate("MainWindow", "شماره:"))
-        self.counter_number.setText(_translate("MainWindow", "1"))
+        self.counter_number.setText(_translate("MainWindow", "0"))
         self.gain_counter.setText(_translate("MainWindow", "0"))
         self.gain.setText(_translate("MainWindow", "سود:"))
         self.episode_label.setText(_translate("MainWindow", "اپیسود:"))
