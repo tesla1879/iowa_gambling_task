@@ -33,14 +33,19 @@ class List:
 class Ui_MainWindow(object):
 
     def __init__(self):
+        self.listA = np.zeros(10).astype(int)
+        self.listB = np.zeros(10).astype(int)
+        self.listC = np.zeros(10).astype(int)
+        self.listD = np.zeros(10).astype(int)
+        self.counter = 0
+        self.episode = 0
+        self.init_lists()
+
+    def init_lists(self):
         self.listA = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
         self.listB = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
         self.listC = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
         self.listD = np.random.normal(np.random.randint(10, 50), np.random.randint(100, 200), 10).astype(int)
-        print(self.listA)
-        print(self.listB)
-        print(self.listC)
-        print(self.listD)
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
