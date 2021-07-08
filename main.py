@@ -59,8 +59,6 @@ class Ui_MainWindow(object):
                  f"مجموع" \
                  f", " \
                  f"کارت" \
-                 f", " \
-                 f"مدت زمان اتنخاب کارت" \
                  f"\n"
         self.file.write(header)
 
@@ -225,7 +223,7 @@ class Ui_MainWindow(object):
                 self.total_score = 0
                 self.counter = 0
             if self.episode < self.max_episode:
-                gain = self.listA[self.counter]
+                gain = self.listB[self.counter]
                 self.total_score += gain
                 if gain > 0:
                     self.gain_counter.setStyleSheet("color: green; font: 14pt")
@@ -276,7 +274,7 @@ class Ui_MainWindow(object):
                 self.total_score = 0
                 self.counter = 0
             if self.episode < self.max_episode:
-                gain = self.listA[self.counter]
+                gain = self.listC[self.counter]
                 self.total_score += gain
                 if gain > 0:
                     self.gain_counter.setStyleSheet("color: green; font: 14pt")
@@ -327,7 +325,7 @@ class Ui_MainWindow(object):
                 self.total_score = 0
                 self.counter = 0
             if self.episode < self.max_episode:
-                gain = self.listA[self.counter]
+                gain = self.listD[self.counter]
                 self.total_score += gain
                 if gain > 0:
                     self.gain_counter.setStyleSheet("color: green; font: 14pt")
