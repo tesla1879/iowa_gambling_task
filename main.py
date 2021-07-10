@@ -67,6 +67,7 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
 
+        # Buttons (cards)
         self.pushButtonA = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonA.setGeometry(QtCore.QRect(220, 160, 141, 201))
         self.pushButtonA.setStyleSheet("background-image: url(./resources/cardrr.png);")
@@ -95,58 +96,72 @@ class Ui_MainWindow(object):
         self.pushButtonD.setObjectName("pushButtonD")
         self.pushButtonD.clicked.connect(self.btnD_on_click)
 
+        # Labels
         self.title = QtWidgets.QLabel(self.centralwidget)
-        self.title.setGeometry(QtCore.QRect(390, 10, 300, 100))
-        self.title.setStyleSheet("font: 75 20pt \"Titr\";")
+        self.title.setGeometry(QtCore.QRect(450, 10, 300, 100))
+        self.title.setStyleSheet("font: 75 20pt \"timesnewroman\";")
         self.title.setObjectName("title")
+
         self.counter_label = QtWidgets.QLabel(self.centralwidget)
-        self.counter_label.setGeometry(QtCore.QRect(800, 380, 71, 31))
+        self.counter_label.setGeometry(QtCore.QRect(220, 380, 100, 30))
         self.counter_label.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.counter_label.setObjectName("counter_label")
+
         self.counter_number = QtWidgets.QLabel(self.centralwidget)
-        self.counter_number.setGeometry(QtCore.QRect(750, 390, 57, 16))
+        self.counter_number.setGeometry(QtCore.QRect(350, 390, 100, 15))
         self.counter_number.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.counter_number.setObjectName("counter_number")
+
         self.gain_counter = QtWidgets.QLabel(self.centralwidget)
-        self.gain_counter.setGeometry(QtCore.QRect(750, 420, 57, 15))
+        self.gain_counter.setGeometry(QtCore.QRect(350, 420, 100, 15))
         self.gain_counter.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.gain_counter.setObjectName("gain_counter")
+
         self.gain = QtWidgets.QLabel(self.centralwidget)
-        self.gain.setGeometry(QtCore.QRect(800, 410, 71, 31))
+        self.gain.setGeometry(QtCore.QRect(220, 410, 100, 30))
         self.gain.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.gain.setObjectName("gain")
+
         self.episode_label = QtWidgets.QLabel(self.centralwidget)
-        self.episode_label.setGeometry(QtCore.QRect(800, 440, 71, 31))
+        self.episode_label.setGeometry(QtCore.QRect(220, 440, 100, 30))
         self.episode_label.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.episode_label.setObjectName("episode_label")
+
         self.episode_counter = QtWidgets.QLabel(self.centralwidget)
-        self.episode_counter.setGeometry(QtCore.QRect(750, 450, 57, 16))
+        self.episode_counter.setGeometry(QtCore.QRect(350, 450, 100, 15))
         self.episode_counter.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.episode_counter.setObjectName("episode_counter")
+
         self.total_score_counter = QtWidgets.QLabel(self.centralwidget)
-        self.total_score_counter.setGeometry(QtCore.QRect(580, 390, 57, 15))
+        self.total_score_counter.setGeometry(QtCore.QRect(680, 390, 100, 15))
         self.total_score_counter.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.total_score_counter.setObjectName("total_score_counter")
+
         self.total_score_label = QtWidgets.QLabel(self.centralwidget)
-        self.total_score_label.setGeometry(QtCore.QRect(630, 380, 71, 31))
+        self.total_score_label.setGeometry(QtCore.QRect(550, 380, 130, 30))
         self.total_score_label.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.total_score_label.setObjectName("total_score_label")
+
         self.card_a = QtWidgets.QLabel(self.centralwidget)
-        self.card_a.setGeometry(QtCore.QRect(280, 120, 16, 31))
+        self.card_a.setGeometry(QtCore.QRect(280, 120, 15, 30))
         self.card_a.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.card_a.setObjectName("card_a")
+
         self.card_b = QtWidgets.QLabel(self.centralwidget)
-        self.card_b.setGeometry(QtCore.QRect(460, 120, 16, 31))
+        self.card_b.setGeometry(QtCore.QRect(460, 120, 15, 30))
         self.card_b.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.card_b.setObjectName("card_b")
+
         self.card_c = QtWidgets.QLabel(self.centralwidget)
-        self.card_c.setGeometry(QtCore.QRect(620, 120, 16, 31))
+        self.card_c.setGeometry(QtCore.QRect(620, 120, 15, 30))
         self.card_c.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.card_c.setObjectName("card_c")
+
         self.card_d = QtWidgets.QLabel(self.centralwidget)
-        self.card_d.setGeometry(QtCore.QRect(790, 120, 16, 31))
+        self.card_d.setGeometry(QtCore.QRect(790, 120, 15, 30))
         self.card_d.setStyleSheet("font: 14pt \"Sans Serif\";")
         self.card_d.setObjectName("card_d")
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1036, 20))
@@ -155,7 +170,6 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
-
 
     def update_gui(self, gain, card):
         if gain > 0:
@@ -199,7 +213,6 @@ class Ui_MainWindow(object):
         elif card == "d":
             self.card_d.setStyleSheet("color: red; font: 14pt")
 
-
     def btnA_on_click(self):
         if self.episode < self.max_episode:
             if self.counter > self.max_counter:
@@ -211,10 +224,9 @@ class Ui_MainWindow(object):
                 self.total_score += gain
                 self.update_gui(gain, "a")
             else:
-                self.title.setText("پایان")
+                self.title.setText("End")
                 self.file.close()
         print(f"A: counter {self.counter}")
-
 
     def btnB_on_click(self):
         if self.episode < self.max_episode:
@@ -227,7 +239,7 @@ class Ui_MainWindow(object):
                 self.total_score += gain
                 self.update_gui(gain, "b")
             else:
-                self.title.setText("پایان")
+                self.title.setText("End")
                 self.file.close()
 
         print(f"B: counter {self.counter}")
@@ -243,7 +255,7 @@ class Ui_MainWindow(object):
                 self.total_score += gain
                 self.update_gui(gain, "c")
             else:
-                self.title.setText("پایان")
+                self.title.setText("End")
                 self.file.close()
 
         print(f"C: counter {self.counter}")
@@ -259,7 +271,7 @@ class Ui_MainWindow(object):
                 self.total_score += gain
                 self.update_gui(gain, "d")
             else:
-                self.title.setText("پایان")
+                self.title.setText("End")
                 self.file.close()
 
         print(f"D: counter {self.counter}")
@@ -267,15 +279,15 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.title.setText(_translate("MainWindow", "روی کارت ها کلیک کنید"))
-        self.counter_label.setText(_translate("MainWindow", "شماره:"))
-        self.counter_number.setText(_translate("MainWindow", f"0/{self.max_counter+1}"))
+        self.title.setText(_translate("MainWindow", "Click on cards"))
+        self.counter_label.setText(_translate("MainWindow", "Number:"))
+        self.counter_number.setText(_translate("MainWindow", f"0/{self.max_counter + 1}"))
         self.gain_counter.setText(_translate("MainWindow", "0"))
-        self.gain.setText(_translate("MainWindow", "سود:"))
-        self.episode_label.setText(_translate("MainWindow", "اپیسود:"))
-        self.episode_counter.setText(_translate("MainWindow", f"1/{self.max_episode-1}"))
+        self.gain.setText(_translate("MainWindow", "Gain:"))
+        self.episode_label.setText(_translate("MainWindow", "Episode:"))
+        self.episode_counter.setText(_translate("MainWindow", f"1/{self.max_episode - 1}"))
         self.total_score_counter.setText(_translate("MainWindow", "0"))
-        self.total_score_label.setText(_translate("MainWindow", "مجموع:"))
+        self.total_score_label.setText(_translate("MainWindow", "Total score:"))
         self.card_a.setText(_translate("MainWindow", "A"))
         self.card_b.setText(_translate("MainWindow", "B"))
         self.card_c.setText(_translate("MainWindow", "C"))
