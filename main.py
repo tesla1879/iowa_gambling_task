@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.max_episode = 11  # since the episode starts from 1 it should be 1 more than the desired maximum
         self.total_score = 0
         self.init_lists()
-        self.file = open(".\\data.csv", "w+", encoding="utf-8")
+        self.file = open("data.csv", "w+", encoding="utf-8")
         header = f"Episode" \
                  f", " \
                  f"Counter" \
